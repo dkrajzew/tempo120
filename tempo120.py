@@ -47,12 +47,29 @@ def nice_time(t):
 
 
 class Scores:
+    """
+    A class that reads, writes, and processes the high score table.
+    
+    Each entry consists of the player's name with a maximum length of 16 characters and 
+    the needed time to accmplish the track in milliseconds. Within the high scores file
+    "scores.txt" each entry is stored in one line, using tab ('\t') to divide the name 
+    and the time.
+    
+    The list may include up to 15 entries. The player's name may be up to 16 characters
+    long.
+    """
     
     def __init__(self):
+        """Loads the scores using load"""
         self.load()
         
 
     def load(self):
+        """Loads the scores.
+        
+        Loads scores from "scores.txt", sorts them by the needed time and prunes
+        them to the maximum length of 15 entries.
+        """
         scores = []
         try:
             with open("scores.txt") as fd:
@@ -65,6 +82,8 @@ class Scores:
         
         
     def save(self):
+        """Saves the scores into "scores.txt"
+        """
         fd = open("scores.txt", "w")
         for s in self._scores:
             fd.write("%s\t%s\n" % (s[0], s[1]))    
@@ -72,6 +91,11 @@ class Scores:
 
 
     def add(self, name, t):
+        """Adds an entry to the scores
+        
+        The name is added and the scores are sorted by time and pruned to
+        the maximum length of 15 entries.
+        """
         scores = []
         scores.append([name, t])
         scores.extend(self._scores)
@@ -81,6 +105,8 @@ class Scores:
 
 
     def draw(self, surface):
+        """Draws the scores onto the given surface
+        """
         img = font.render("Scores", True, (255, 255, 255))
         surface.blit(img, ((SCR_WIDTH-img.get_width())/2, 40))
         for i,s in enumerate(self._scores):
@@ -92,6 +118,9 @@ class Scores:
 
 
 class Track:
+    """
+    A class that stores the track.
+    """
     def __init__(self, image):
         self._height = image.get_height()
         self._width = image.get_width()
@@ -110,15 +139,24 @@ class Track:
 
     
     def get_next_starting_position(self):
+        """Returns the next (and currently only) starting position.
+        """
         pos = self._start_positions[-1]
         return (pos[0]*SIZE, pos[1]*SIZE)
         
         
     def get_floor(self, x, y):
+        """Returns the type of the floow that is below the given position.
+        """
         return self._matrix[int(y/SIZE)][int(x/SIZE)]
     
     
     def draw(self, surface, view):
+        """Draws the track
+        
+        Well, ok. Computing the offset / initial (top left-most one) tile took me
+        to long. I suppose there is a better way to do this.
+        """
         # compute offsets
         xib = int(view.left/SIZE)
         yib = int(view.top/SIZE)
@@ -154,8 +192,14 @@ class Track:
 
 
 class Vehicle:
+    """A vehicle
+    
+    A vehicle mainly consists of a position, an orientation and an image.
+    It has a velocity and a delta-orientation as well...
+    """
     
     def __init__(self, x, y, o, image):
+        """Initialises the vehicle"""
         self._x = x
         self._y = y
         self._o = o
@@ -166,6 +210,7 @@ class Vehicle:
         
 
     def draw(self, surface):
+        """Draws the vehicle onto the given surface"""
         rot_image = pygame.transform.rotate(self._image, self._o)
         rot_rect = rot_image.get_rect(center=(8, 16))  
         rot_rect = rot_rect.move((SCR_WIDTH/2, SCR_HEIGHT/2))
@@ -173,14 +218,17 @@ class Vehicle:
 
 
     def accel(self, dt, value):
+        """Accelerates/decelerates the vehicle"""
         self._v = min(100, max(-10, self._v + value * dt))
 
 
     def steer(self, dt, value):
+        """Steers the vehicle"""
         self._do += self._v * value
 
 
     def step(self, game, dt):
+        """Performs a simulation step"""
         floor = game._track.get_floor(self._x, self._y)
         if floor==(255, 255, 255, 255):
             game.track_finished()
@@ -207,18 +255,23 @@ class Vehicle:
 
 
 class Ego(Vehicle):
+    """The ego vehicle, just a derivation of Vehicle with no additional functionality"""
     
     def __init__(self, x, y, o, image):
+        """Initialises the vehicle"""
         Vehicle.__init__(self, x, y, o, image)
 
 
 
 
 class NPC(Vehicle):
+    """An NPC vehicle, currently not used, just a derivation of Vehicle with no additional functionality"""
     def __init__(self, x, y, o, image):
+        """Initialises the vehicle"""
         Vehicle.__init__(self, x, y, o, image)
 
     def step(self, game, dt):
+        """Performs a simulation step"""
         Vehicle.step(self, x, y, o, image)
 
 
@@ -335,9 +388,9 @@ engine_channel = pygame.mixer.Channel(1)
 car = pygame.image.load("./gfx/car.png")
 title = pygame.image.load("./gfx/title.png")
 image = pygame.image.load("./gfx/track01.png")
-theme_sound = pygame.mixer.Sound("racing-track.ogg")
+theme_sound = pygame.mixer.Sound("./muzak/racing-track.ogg")
 theme_sound.set_volume(1)
-engine_sound = pygame.mixer.Sound("race-car-engine.ogg")
+engine_sound = pygame.mixer.Sound("./muzak/race-car-engine.ogg")
 engine_sound.set_volume(1)
 game = Game(image, car)
 surface = pygame.display.set_mode((SCR_WIDTH, SCR_HEIGHT))
