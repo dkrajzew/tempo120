@@ -12,7 +12,7 @@ The higher the speed the more difficult is it to control the vehicle. You do not
 
 # Install
 
-The most recent compiled version can be found on itch.io. This repository includes the source code and assets needed to build / extend the game.
+The most recent compiled version can be found on [itch.io](https://dkrajzew.itch.io/tempo120). This repository includes the source code and assets needed to build / extend the game.
 
 # How to extend
 
