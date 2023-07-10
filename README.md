@@ -30,10 +30,6 @@ There is a single plain red (255, 0, 0, 255) pixel on the track which defines th
 
 _If you build your own levels, don't forget to share them!_
 
-## Code of Conduct
-
-!!!
-
 
 # Possible extensions
 
