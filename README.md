@@ -1,6 +1,6 @@
 # Tempo120
 
-A racing game written using Python/pygame during the bpb (Bundeszentrale für politische Bildung) game jam 2023. The game jam's topic was mobility.
+A racing game written using Python/pygame during the [bpb](https://www.bpb.de/) ([Bundeszentrale fÃ¼r politische Bildung](https://www.bpb.de/)) game jam 2023. The game jam's topic was mobility.
 
 You may download an executable version on itch.io.
 
