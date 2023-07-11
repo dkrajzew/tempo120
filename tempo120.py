@@ -1,3 +1,17 @@
+# ===================================================================
+# Tempo120 - A web type setter.
+#
+# The game itself
+#
+# (c) Daniel Krajzewicz 2023
+# daniel@krajzewicz.de
+# - https://github.com/dkrajzew/tempo120
+#
+# Available under the GPL license.
+# ===================================================================
+
+
+# --- imports -------------------------------------------------------
 from random import random
 import os
 import sys
@@ -6,6 +20,8 @@ import pygame
 import pygame.gfxdraw
 from pygame.locals import *
 
+
+# --- constants -----------------------------------------------------
 SIZE = 32
 VIEW_WIDTH = 40
 VIEW_HEIGHT = 25
@@ -19,6 +35,7 @@ GAME = 3
 SET_SCORE = 4
 
 
+# --- helper methods ------------------------------------------------
 def rotatePoint(p, center, angle):
     s = math.sin(angle);
     c = math.cos(angle);
@@ -46,6 +63,7 @@ def nice_time(t):
     return "%02d:%02d:%02d.%03d" % (hours, minutes, seconds, millis)
 
 
+# --- game classes --------------------------------------------------
 class Scores:
     """
     A class that reads, writes, and processes the high score table.
@@ -60,7 +78,7 @@ class Scores:
     """
     
     def __init__(self):
-        """Loads the scores using load"""
+        """Loads the scores using the load method."""
         self.load()
         
 
@@ -104,7 +122,7 @@ class Scores:
         self.save()
 
 
-    def draw(self, surface):
+    def draw(self, surface, font):
         """Draws the scores onto the given surface
         """
         img = font.render("Scores", True, (255, 255, 255))
@@ -121,7 +139,10 @@ class Track:
     """
     A class that stores the track.
     """
+    
     def __init__(self, image):
+        """Initialises the track
+        """
         self._height = image.get_height()
         self._width = image.get_width()
         self._start_positions = []
@@ -277,24 +298,44 @@ class NPC(Vehicle):
 
 
 class Game:
-    def __init__(self, image, car):
-        self._height = image.get_height()
-        self._width = image.get_width()
-        self._track = Track(image)
+    """The game class"""
+    
+    def __init__(self):
+        """Initialises the game
+        """
+        self._car_image = pygame.image.load("./gfx/car.png")
+        self._title_image = pygame.image.load("./gfx/title.png")
+        track_image = pygame.image.load("./gfx/track01.png")
+        self._theme_sound = pygame.mixer.Sound("./muzak/racing-track.ogg")
+        self._theme_sound.set_volume(1)
+        self._engine_sound = pygame.mixer.Sound("./muzak/race-car-engine.ogg")
+        self._engine_sound.set_volume(1)
+        self._font = pygame.font.SysFont(None, 48)
+        self._height = track_image.get_height()
+        self._width = track_image.get_width()
+        self._track = Track(track_image)
+        self._theme_channel = pygame.mixer.Channel(0)
+        self._engine_channel = pygame.mixer.Channel(1)
         self._scores = Scores()
         self._start_time = 0
         self._last_entered_time = 0
+        self._pressed_keys = set()
         self.init()
 
     def init(self):
+        """Initialises a game run
+        """
         start_position = self._track.get_next_starting_position()
-        self._ego = Ego(start_position[0], start_position[1], 180, car)
+        self._ego = Ego(start_position[0], start_position[1], 180, self._car_image)
         self._state = INTRO_TITLE
-        theme_channel.play(theme_sound)    
+        self._theme_channel.play(self._theme_sound)    
         self._start_time = pygame.time.get_ticks()
-        engine_channel.stop()    
+        self._engine_channel.stop()    
+
 
     def draw(self, surface):
+        """Performs the drawing (all screens)
+        """
         surface.fill((0, 0, 0))
         xs = SCR_WIDTH/2
         ys = SCR_HEIGHT/2
@@ -304,7 +345,7 @@ class Game:
             blend_image = pygame.Surface((SCR_WIDTH, SCR_HEIGHT), pygame.SRCALPHA)
             pygame.draw.rect(blend_image, (0, 0, 0, 100), blend_image.get_rect())
             surface.blit(blend_image, (0, 0))
-            surface.blit(title, (0, 0))
+            surface.blit(self._title_image, (0, 0))
             dt = int((pygame.time.get_ticks() - self._start_time) / 1000)
             if dt>5:
                 self._state = INTRO_SCORES
@@ -313,52 +354,54 @@ class Game:
             blend_image = pygame.Surface((SCR_WIDTH, SCR_HEIGHT), pygame.SRCALPHA)
             pygame.draw.rect(blend_image, (0, 0, 0, 100), blend_image.get_rect())
             surface.blit(blend_image, (0, 0))
-            self._scores.draw(surface)
+            self._scores.draw(surface, self._font)
             dt = int((pygame.time.get_ticks() - self._start_time) / 1000)
             if dt>5:
                 self._state = INTRO_TITLE
                 self._start_time = pygame.time.get_ticks()
         elif self._state==BEGIN:
             dt = int((pygame.time.get_ticks() - self._start_time) / 1000)
-            img = font.render("%s" % (3-dt), True, (255, 255, 255))
+            img = self._font.render("%s" % (3-dt), True, (255, 255, 255))
             surface.blit(img, ((SCR_WIDTH-img.get_width())/2, 320))
             self._ego.draw(surface)
         elif self._state==GAME:
             self._ego.draw(surface)
-            img = font.render("{:10.2f} km/h".format(game._ego._v*20), True, (255, 255, 255))
+            img = self._font.render("{:10.2f} km/h".format(self._ego._v*20), True, (255, 255, 255))
             surface.blit(img, (20, 20))
             level_time = pygame.time.get_ticks() - self._start_time
-            img = font.render(nice_time(level_time), True, (255, 255, 255))
+            img = self._font.render(nice_time(level_time), True, (255, 255, 255))
             surface.blit(img, (SCR_WIDTH-60-img.get_width(), 20))
         elif self._state==SET_SCORE:
             blend_image = pygame.Surface((SCR_WIDTH, SCR_HEIGHT), pygame.SRCALPHA)
             pygame.draw.rect(blend_image, (0, 0, 0, 100), blend_image.get_rect())
             surface.blit(blend_image, (0, 0))
             self._ego.draw(surface)
-            img = font.render("Your time: " + nice_time(self._level_time), True, (255, 255, 255))
+            img = self._font.render("Your time: " + nice_time(self._level_time), True, (255, 255, 255))
             surface.blit(img, ((SCR_WIDTH-img.get_width())/2, 320))
-            img = font.render("Please enter your name:", True, (255, 255, 255))
+            img = self._font.render("Please enter your name:", True, (255, 255, 255))
             surface.blit(img, ((SCR_WIDTH-img.get_width())/2, 380))
-            img = font.render(self._current_name, True, (255, 255, 255))
+            img = self._font.render(self._current_name, True, (255, 255, 255))
             surface.blit(img, ((SCR_WIDTH-img.get_width())/2, 440))
 
     def process_keys(self, dt):
+        """Processes the key inputs
+        """
         if self._state==INTRO_TITLE or self._state==INTRO_SCORES:
-            if pygame.K_SPACE in pressed_keys:
+            if pygame.K_SPACE in self._pressed_keys:
                 self._state = BEGIN
                 self._start_time = pygame.time.get_ticks()
-                theme_channel.stop()    
-                engine_channel.play(engine_sound)    
+                self._theme_channel.stop()    
+                self._engine_channel.play(self._engine_sound)    
         elif self._state==BEGIN:
             dt = int((pygame.time.get_ticks() - self._start_time) / 1000)
             if dt>2:
                 self._state = GAME
                 self._start_time = pygame.time.get_ticks()    
         elif self._state==GAME:
-            k_left = pygame.K_LEFT in pressed_keys or pygame.K_a in pressed_keys
-            k_right = pygame.K_RIGHT in pressed_keys or pygame.K_d in pressed_keys
-            k_up = pygame.K_UP in pressed_keys or pygame.K_w in pressed_keys
-            k_down = pygame.K_DOWN in pressed_keys or pygame.K_s in pressed_keys
+            k_left = pygame.K_LEFT in self._pressed_keys or pygame.K_a in self._pressed_keys
+            k_right = pygame.K_RIGHT in self._pressed_keys or pygame.K_d in self._pressed_keys
+            k_up = pygame.K_UP in self._pressed_keys or pygame.K_w in self._pressed_keys
+            k_down = pygame.K_DOWN in self._pressed_keys or pygame.K_s in self._pressed_keys
             if k_left and not k_right:
                 self._ego.steer(dt, 5)
             if k_right and not k_left:
@@ -367,64 +410,61 @@ class Game:
                 self._ego.accel(dt, 1)
             if k_down and not k_up:
                 self._ego.accel(dt, -1)
-            if pygame.K_ESCAPE in pressed_keys:
+            if pygame.K_ESCAPE in self._pressed_keys:
                 self._state = INTRO_TITLE
                 self.init()
 
+
     def track_finished(self):
+        """Closes the gaming mode, moves to user name entry
+        """
         if self._state==SET_SCORE:
             return 
         self._current_name = ""
-        pressed_keys = set()
+        self._pressed_keys = set()
         self._state = SET_SCORE
         self._level_time = pygame.time.get_ticks() - self._start_time
         self._start_time = pygame.time.get_ticks()
                 
 
-pygame.init()
-pygame.mixer.init()
-theme_channel = pygame.mixer.Channel(0)
-engine_channel = pygame.mixer.Channel(1)
-car = pygame.image.load("./gfx/car.png")
-title = pygame.image.load("./gfx/title.png")
-image = pygame.image.load("./gfx/track01.png")
-theme_sound = pygame.mixer.Sound("./muzak/racing-track.ogg")
-theme_sound.set_volume(1)
-engine_sound = pygame.mixer.Sound("./muzak/race-car-engine.ogg")
-engine_sound.set_volume(1)
-game = Game(image, car)
-surface = pygame.display.set_mode((SCR_WIDTH, SCR_HEIGHT))
-surface.fill((0, 0, 0))
-pygame.display.set_caption("Tempo 120")
-font = pygame.font.SysFont(None, 48)
+# --- main function -------------------------------------------------
+def main(args=None):
+    pygame.init()
+    pygame.mixer.init()
+    game = Game()
+    surface = pygame.display.set_mode((SCR_WIDTH, SCR_HEIGHT))
+    surface.fill((0, 0, 0))
+    pygame.display.set_caption("Tempo 120")
 
-t1 = pygame.time.get_ticks()
-pressed_keys = set()
-while True:
-    t2 = pygame.time.get_ticks()
-    dt = (t2 - t1) / 1000.
-    for event in pygame.event.get():              
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
-        if event.type == pygame.KEYDOWN:
-            pressed_keys.add(event.key)
-            if game._state==SET_SCORE:
-                if event.key==pygame.K_BACKSPACE:
-                    game._current_name = game._current_name[:-1]
-                elif event.key==pygame.K_RETURN:
-                    game._scores.add(game._current_name, game._level_time)
-                    game.init()
-                else:
-                    game._current_name += event.unicode
-                    if len(game._current_name)>16: game._current_name = game._current_name[:16]
-        if event.type == pygame.KEYUP:
-            pressed_keys.remove(event.key)
+    t1 = pygame.time.get_ticks()
+    while True:
+        t2 = pygame.time.get_ticks()
+        dt = (t2 - t1) / 1000.
+        for event in pygame.event.get():              
+            if event.type==QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type==pygame.KEYDOWN:
+                game._pressed_keys.add(event.key)
+                if game._state==SET_SCORE:
+                    if event.key==pygame.K_BACKSPACE:
+                        game._current_name = game._current_name[:-1]
+                    elif event.key==pygame.K_RETURN:
+                        game._scores.add(game._current_name, game._level_time)
+                        game.init()
+                    else:
+                        game._current_name += event.unicode
+                        if len(game._current_name)>16: game._current_name = game._current_name[:16]
+            if event.type==pygame.KEYUP and event.key in game._pressed_keys:
+                game._pressed_keys.remove(event.key)
+        game.process_keys(dt)
+        game._ego.step(game, dt)
+        game.draw(surface)
+        pygame.display.update()
+        t1 = t2
+    pygame.mixer.quit()
 
-    game.process_keys(dt)
-    game._ego.step(game, dt)
-    game.draw(surface)
-    pygame.display.update()
-    t1 = t2
 
-pygame.mixer.quit()
+# -- main check
+if __name__ == '__main__':
+    main(sys.argv) # pragma: no cover
