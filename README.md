@@ -39,6 +39,8 @@ You can build an executable using
 
 If you have ```pyinstaller``` installed...
 
+You must then copy the assets folders (gfx, muzak) and optionally the scores into the generated dist folder.
+
 The executable runs on the type of machines you have executed pyinstaller at.
 
 
