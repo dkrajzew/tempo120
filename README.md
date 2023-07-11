@@ -35,9 +35,9 @@ __If you build your own levels, don't forget to share them!__
 
 You can build an executable using
 
-´´´pyinstaller --onefile tempo120.py´´´
+```pyinstaller --onefile tempo120.py```
 
-If you have ´´´pyinstaller´´´ installed...
+If you have ```pyinstaller``` installed...
 
 The executable runs on the type of machines you have executed pyinstaller at.
 
