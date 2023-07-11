@@ -57,3 +57,9 @@ Possible extensions could be:
 
 I like the game and may port it to c++ once.
 
+
+# License
+
+The game is licensed under the GPL 3.0.
+
+
