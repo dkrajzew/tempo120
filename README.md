@@ -59,6 +59,9 @@ Possible extensions could be:
 
 I like the game and may port it to c++ once.
 
+# Notes
+
+* I tried to use bitmap tiles instead of simply filled polygons - the game gets much slower.
 
 # License
 
