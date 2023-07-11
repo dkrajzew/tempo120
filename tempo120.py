@@ -34,6 +34,12 @@ BEGIN = 2
 GAME = 3
 SET_SCORE = 4
 
+TILE_TRACK = (139, 139, 139, 255)
+TILE_GRASS = (100, 255, 0, 255)
+TILE_GOAL = (255, 255, 255, 255)
+TILE_START = (255, 0, 0, 255)
+
+ 
 
 # --- helper methods ------------------------------------------------
 def rotatePoint(p, center, angle):
@@ -146,17 +152,13 @@ class Track:
         self._height = image.get_height()
         self._width = image.get_width()
         self._start_positions = []
-        self._matrix = []
-        green = image.get_at((0, 0))
+        self._image = image
         for y in range(0, self._height):
-            line = []
             for x in range(0, self._width):
-                col = image.get_at((x, y))
-                if col==(255, 0, 0, 255):
+                col = self._image.get_at((x, y))
+                if col==TILE_START:
                     self._start_positions.append((x, y))
-                    col = green
-                line.append(col)
-            self._matrix.append(line)
+                    self._image.set_at((x, y), TILE_TRACK)
 
     
     def get_next_starting_position(self):
@@ -169,7 +171,7 @@ class Track:
     def get_floor(self, x, y):
         """Returns the type of the floow that is below the given position.
         """
-        return self._matrix[int(y/SIZE)][int(x/SIZE)]
+        return self._image.get_at((int(x/SIZE), int(y/SIZE)))
     
     
     def draw(self, surface, view):
@@ -198,7 +200,6 @@ class Track:
             if y<0 or y>=self._height: continue
             for xi,x in enumerate(range(xib, xib+VIEW_WIDTH+1)):
                 if x<0 or x>=self._width: continue
-                if self._matrix[y][x]==None: continue
                 yp = yi * SIZE + ypb
                 xp = xi * SIZE + xpb
                 p = []
@@ -207,7 +208,7 @@ class Track:
                 p.append([xp+SIZE, yp+SIZE])
                 p.append([xp, yp+SIZE])
                 p.append([xp, yp])
-                pygame.gfxdraw.filled_polygon(surface, p, self._matrix[y][x])
+                pygame.gfxdraw.filled_polygon(surface, p, self._image.get_at((x, y)))
 
 
 
@@ -251,11 +252,11 @@ class Vehicle:
     def step(self, game, dt):
         """Performs a simulation step"""
         floor = game._track.get_floor(self._x, self._y)
-        if floor==(255, 255, 255, 255):
+        if floor==TILE_GOAL:
             game.track_finished()
             self._v = 0
             self._do = 0
-        elif floor==(100, 255, 0, 255):
+        elif floor==TILE_GRASS:
             v = self._v
             if self._v>1:
                 self.accel(dt, -10)
@@ -382,6 +383,7 @@ class Game:
             surface.blit(img, ((SCR_WIDTH-img.get_width())/2, 380))
             img = self._font.render(self._current_name, True, (255, 255, 255))
             surface.blit(img, ((SCR_WIDTH-img.get_width())/2, 440))
+            
 
     def process_keys(self, dt):
         """Processes the key inputs
