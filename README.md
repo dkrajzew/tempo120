@@ -10,13 +10,14 @@ __Tempo120__ is a very simple car racing game. You may control your vehicle usin
 
 The higher the speed the more difficult is it to control the vehicle. You do not need to accelerate all the time. The speed stays same unless you brake or drive besides the road.
 
-# Install
+
+# How to...
+
+## Install
 
 The most recent compiled version can be found on [itch.io](https://dkrajzew.itch.io/tempo120). This repository includes the source code and assets needed to build / extend the game.
 
-# How to extend
-
-## Levels/Tracks
+## Build own Levels/Tracks
 
 The game stores its tracks in .png-images. In theory, the images may have an arbitrary size, but you may encounter memory issues if they get too big.
 
@@ -29,6 +30,16 @@ A plain white (255, 255, 255, 255) line indicates the end of the track - when re
 There is a single plain red (255, 0, 0, 255) pixel on the track which defines the vehicle's starting position.
 
 __If you build your own levels, don't forget to share them!__
+
+## Build a standalone executable
+
+You can build an executable using
+
+´´´pyinstaller --onefile tempo120.py´´´
+
+If you have ´´´pyinstaller´´´ installed...
+
+The executable runs on the type of machines you have executed pyinstaller at.
 
 
 # Possible extensions
