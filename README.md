@@ -6,7 +6,7 @@ You may download an executable version on [itch.io](https://dkrajzew.itch.io/tem
 
 # About
 
-_Tempo120_ is a very simple car racing game. You may control your vehicle using the cursor keys or WASD.
+__Tempo120__ is a very simple car racing game. You may control your vehicle using the cursor keys or WASD.
 
 The higher the speed the more difficult is it to control the vehicle. You do not need to accelerate all the time. The speed stays same unless you brake or drive besides the road.
 
@@ -28,7 +28,7 @@ A plain white (255, 255, 255, 255) line indicates the end of the track - when re
 
 There is a single plain red (255, 0, 0, 255) pixel on the track which defines the vehicle's starting position.
 
-_If you build your own levels, don't forget to share them!_
+__If you build your own levels, don't forget to share them!__
 
 
 # Possible extensions
