@@ -325,8 +325,10 @@ class Game:
         self._scores = Scores()
         self._start_time = 0
         self._last_entered_time = 0
+        self._quit = False
         self._pressed_keys = set()
         self.init()
+        
 
     def init(self):
         """Initialises a game run
@@ -398,7 +400,9 @@ class Game:
                 self._state = BEGIN
                 self._start_time = pygame.time.get_ticks()
                 self._theme_channel.stop()    
-                self._engine_channel.play(self._engine_sound)    
+                self._engine_channel.play(self._engine_sound, loops=-1)    
+            elif pygame.K_ESCAPE in self._pressed_keys:
+                self._quit = True
         elif self._state==BEGIN:
             dt = int((pygame.time.get_ticks() - self._start_time) / 1000)
             if dt>2:
@@ -444,7 +448,7 @@ def main(args=None):
     pygame.display.set_caption("Tempo 120")
 
     t1 = pygame.time.get_ticks()
-    while True:
+    while not game._quit:
         t2 = pygame.time.get_ticks()
         dt = (t2 - t1) / 1000.
         for event in pygame.event.get():              
