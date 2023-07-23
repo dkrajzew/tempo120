@@ -23,9 +23,9 @@ The game stores its tracks in .png-images. In theory, the images may have an arb
 
 Each pixel in the image represents a field within the game.
 
-The track's background should be in (100, 255, 0, 255) green what is interpreted as grass. The track itself should be drawn on it using grey. I used (139, 139, 139, 255) as color and a plain, round brush with a size of 14 pixels. The track is surrounded by "tires" (0, 0, 0, 255) which stop the vehicle completely. In the default track, tires are placed in a distance of 7 pixel around the track.
+The track's background should be in (100, 255, 0, 255) green what is interpreted as grass. The track itself should be drawn on it using grey. I used (139, 139, 139, 255) as color and a plain, round brush with a size of 14 pixels. The track is surrounded by "tires" (0, 0, 0, 255) which stop the vehicle completely. In the default track, tires are placed in a distance of 7 pixels around the track.
 
-A plain white (255, 255, 255, 255) line indicates the end of the track - when reaching it, the round ends and you may insert your name which may occure in the high scores.
+A plain white (255, 255, 255, 255) line indicates the end of the track - when reaching it, the round ends and you may insert your name which may occur in the high scores.
 
 There is a single plain red (255, 0, 0, 255) pixel on the track which defines the vehicle's starting position.
 
@@ -54,6 +54,7 @@ Possible extensions could be:
 * adding other vehicle types
 * introducing something to avoid cheating (you can basically drive backwards...)
 * introducing more rounds
+* adding further tracks
 * some kind of an integration of further tracks
 * multiplayer mode
 
