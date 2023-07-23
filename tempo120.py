@@ -38,6 +38,7 @@ TILE_TRACK = (139, 139, 139, 255)
 TILE_GRASS = (100, 255, 0, 255)
 TILE_GOAL = (255, 255, 255, 255)
 TILE_START = (255, 0, 0, 255)
+TILE_TIRES = (0, 0, 0, 255)
 
  
 
@@ -156,6 +157,7 @@ class Track:
         for y in range(0, self._height):
             for x in range(0, self._width):
                 col = self._image.get_at((x, y))
+                #print (col)
                 if col==TILE_START:
                     self._start_positions.append((x, y))
                     self._image.set_at((x, y), TILE_TRACK)
@@ -263,6 +265,8 @@ class Vehicle:
             else:
                 self._v = max(-0.1, min(0.1, self._v))
             self._offtrack += dt
+        elif floor==TILE_TIRES:
+            self._v = 0
         self._o += self._do * dt
         while self._o>360:
             self._o -= 360
@@ -272,6 +276,7 @@ class Vehicle:
         self._do = ndo if self._do>=0 else -ndo
         self._x += math.sin(self._o / 180 * math.pi) * self._v
         self._y += math.cos(self._o / 180 * math.pi) * self._v
+        game._engine_sound.set_volume(max(.2, .2+.8*min(150, self._v*20)/150.))
 
 
 
@@ -307,10 +312,10 @@ class Game:
         self._car_image = pygame.image.load("./gfx/car.png")
         self._title_image = pygame.image.load("./gfx/title.png")
         track_image = pygame.image.load("./gfx/track01.png")
-        self._theme_sound = pygame.mixer.Sound("./muzak/racing-track.ogg")
+        self._theme_sound = pygame.mixer.Sound("./muzak/track.ogg")
         self._theme_sound.set_volume(1)
-        self._engine_sound = pygame.mixer.Sound("./muzak/race-car-engine.ogg")
-        self._engine_sound.set_volume(1)
+        self._engine_sound = pygame.mixer.Sound("./muzak/engine.ogg")
+        self._engine_sound.set_volume(.2)
         self._font = pygame.font.SysFont(None, 48)
         self._height = track_image.get_height()
         self._width = track_image.get_width()
@@ -329,7 +334,7 @@ class Game:
         start_position = self._track.get_next_starting_position()
         self._ego = Ego(start_position[0], start_position[1], 180, self._car_image)
         self._state = INTRO_TITLE
-        self._theme_channel.play(self._theme_sound)    
+        self._theme_channel.play(self._theme_sound, loops=-1)    
         self._start_time = pygame.time.get_ticks()
         self._engine_channel.stop()    
 
