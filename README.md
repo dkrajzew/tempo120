@@ -64,7 +64,7 @@ I like the game and may port it to c++ once.
 ## v0.6.0 (to come)
 
 * added tires to disallow cheating
-* patched the engine noise
+* patched the engine noise (repeating, volume in dependence to speed)
 * some smaller improvements
 
 # Notes
