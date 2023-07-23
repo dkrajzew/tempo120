@@ -8,7 +8,7 @@ You may download an executable version on [itch.io](https://dkrajzew.itch.io/tem
 
 __Tempo120__ is a very simple car racing game. You may control your vehicle using the cursor keys or WASD.
 
-The higher the speed the more difficult is it to control the vehicle. You do not need to accelerate all the time. The speed stays same unless you brake or drive besides the road.
+The higher the speed the more difficult it is to control the vehicle. You do not need to accelerate all the time. The speed stays same unless you brake or drive besides the road.
 
 
 # How to...
@@ -21,9 +21,9 @@ The most recent compiled version can be found on [itch.io](https://dkrajzew.itch
 
 The game stores its tracks in .png-images. In theory, the images may have an arbitrary size, but you may encounter memory issues if they get too big.
 
-Each pixel in the image represents a field within the game. The most top left pixel must have the same color as the racing track.
+Each pixel in the image represents a field within the game.
 
-The track's background should be in (100, 255, 0, 255) green what is interpreted as grass. The track itself should be drawn on it using grey. I used (139, 139, 139, 255) as color and a plain, round brush with a size of 14 pixels.
+The track's background should be in (100, 255, 0, 255) green what is interpreted as grass. The track itself should be drawn on it using grey. I used (139, 139, 139, 255) as color and a plain, round brush with a size of 14 pixels. The track is surrounded by "tires" (0, 0, 0, 255) which stop the vehicle completely. In the default track, tires are placed in a distance of 7 pixel around the track.
 
 A plain white (255, 255, 255, 255) line indicates the end of the track - when reaching it, the round ends and you may insert your name which may occure in the high scores.
 
@@ -58,6 +58,14 @@ Possible extensions could be:
 * multiplayer mode
 
 I like the game and may port it to c++ once.
+
+# Change Log
+
+## v0.6.0 (to come)
+
+* added tires to disallow cheating
+* patched the engine noise
+* some smaller improvements
 
 # Notes
 
