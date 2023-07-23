@@ -62,7 +62,7 @@ I like the game and may port it to c++ once.
 
 # Change Log
 
-## v0.6.0 (to come)
+## v0.6.0 (23.07.2023)
 
 * added tires to disallow cheating
 * patched the engine noise (repeating, volume in dependence to speed)
