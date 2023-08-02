@@ -1,13 +1,15 @@
 # ===================================================================
-# Tempo120 - A web type setter.
+# tempo120 - A party car racing game.
 #
 # The game itself
 #
 # (c) Daniel Krajzewicz 2023
 # daniel@krajzewicz.de
 # - https://github.com/dkrajzew/tempo120
+# - https://dkrajzew.itch.io/tempo120
+# - http://www.krajzewicz.de
 #
-# Available under the GPL license.
+# Available under the GPLv3 license.
 # ===================================================================
 
 
