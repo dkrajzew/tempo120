@@ -1,5 +1,11 @@
 # Tempo120
 
+[![License: GPL3]([https://img.shields.io/badge/License-GNU%20GPL-blue](https://img.shields.io/badge/License-GNU%20GPL-blue)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE)
+[![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/degrotesque)
+[![Downloads](https://pepy.tech/badge/degrotesque)](https://pepy.tech/project/degrotesque)
+[![Downloads](https://static.pepy.tech/badge/degrotesque/week)](https://pepy.tech/project/degrotesque)
+
+
 A racing game written using Python/pygame during the [bpb](https://www.bpb.de/) ([Bundeszentrale für politische Bildung](https://www.bpb.de/)) [game jam 2023](https://www.bpb.de/veranstaltungen/veranstaltungskalender/518950/bpb-game-jam-2023/). The game jam's topic was mobility.
 
 You may download an executable version on [itch.io](https://dkrajzew.itch.io/tempo120).
@@ -61,6 +67,11 @@ Possible extensions could be:
 I like the game and may port it to c++ once.
 
 # Change Log
+
+## v0.8.0 (02.08.2023)
+
+* included track debugging from
+* added a setup script, you may now download the current release from [PyPi](https://pypi.org/project/degrotesque/)
 
 ## v0.6.0 (23.07.2023)
 
