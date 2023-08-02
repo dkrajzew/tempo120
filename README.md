@@ -1,9 +1,9 @@
 # Tempo120
 
-[![License: BSD](https://img.shields.io/badge/License-GNU%20GPL-blue)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE)
-[![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/degrotesque)
-[![Downloads](https://pepy.tech/badge/degrotesque)](https://pepy.tech/project/degrotesque)
-[![Downloads](https://static.pepy.tech/badge/degrotesque/week)](https://pepy.tech/project/degrotesque)
+[![License: BSD](https://img.shields.io/badge/License-GNU%20GPL-blue)](https://github.com/dkrajzew/tempo120/blob/master/LICENSE)
+[![PyPI version](https://badge.fury.io/py/tempo120.svg)](https://pypi.python.org/pypi/tempo120)
+[![Downloads](https://pepy.tech/badge/tempo120)](https://pepy.tech/project/tempo120)
+[![Downloads](https://static.pepy.tech/badge/tempo120/week)](https://pepy.tech/project/tempo120)
 
 
 A racing game written using Python/pygame during the [bpb](https://www.bpb.de/) ([Bundeszentrale für politische Bildung](https://www.bpb.de/)) [game jam 2023](https://www.bpb.de/veranstaltungen/veranstaltungskalender/518950/bpb-game-jam-2023/). The game jam's topic was mobility.
