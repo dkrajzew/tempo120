@@ -1,6 +1,6 @@
 # Tempo120
 
-[![License: GPL3]([https://img.shields.io/badge/License-GNU%20GPL-blue](https://img.shields.io/badge/License-GNU%20GPL-blue)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE)
+[![License: BSD](https://img.shields.io/badge/License-GNU%20GPL-blue)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE)
 [![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/degrotesque)
 [![Downloads](https://pepy.tech/badge/degrotesque)](https://pepy.tech/project/degrotesque)
 [![Downloads](https://static.pepy.tech/badge/degrotesque/week)](https://pepy.tech/project/degrotesque)
