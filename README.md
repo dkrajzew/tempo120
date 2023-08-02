@@ -70,7 +70,7 @@ I like the game and may port it to c++ once.
 
 ## v0.8.0 (02.08.2023)
 
-* included track debugging from
+* included track debugging from [MapleMonarch](https://maplemonarch.itch.io/)
 * added a setup script, you may now download the current release from [PyPi](https://pypi.org/project/degrotesque/)
 
 ## v0.6.0 (23.07.2023)
