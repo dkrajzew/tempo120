@@ -37,13 +37,14 @@ setuptools.setup(
         'Tracker': 'https://github.com/dkrajzew/tempo120/issues',
         'Discussions': 'https://github.com/dkrajzew/tempo120/discussions',
     },
-    license='BSD',
+    license='GPLv3',
     # add modules
     py_modules = ['tempo120'],
-    packages = ['.','gfx','muzak'],
+    packages = ['gfx','muzak','scores'],
     package_data = {
         'gfx': ['*'],
-        'muzak': ['*']
+        'muzak': ['*'],
+        'scores': ['*']
     },
     entry_points = {
         'console_scripts': [
