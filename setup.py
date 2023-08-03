@@ -40,6 +40,11 @@ setuptools.setup(
     license='BSD',
     # add modules
     py_modules = ['tempo120'],
+    packages = ['.','gfx','muzak'],
+    package_data = {
+        'gfx': ['*'],
+        'muzak': ['*']
+    },
     entry_points = {
         'console_scripts': [
             'tempo120 = tempo120:main'
