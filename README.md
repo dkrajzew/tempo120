@@ -70,6 +70,10 @@ I like the game and may port it to c++ once.
 
 # Change Log
 
+## v1.0.0 (03.08.2023)
+
+* adding missing assets to the Python release
+
 ## v0.8.0 (02.08.2023)
 
 * included track debugging from [MapleMonarch](https://maplemonarch.itch.io/)
