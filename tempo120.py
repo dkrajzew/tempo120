@@ -99,7 +99,7 @@ class Scores:
         """
         scores = []
         try:
-            with open("scores.txt") as fd:
+            with open(os.path.join(os.path.dirname(__file__), "scores", "scores.txt")) as fd:
                 for l in fd:
                     name, t = l.strip().split("\t")
                     scores.append([name, int(t)])
@@ -111,7 +111,7 @@ class Scores:
     def save(self):
         """Saves the scores into "scores.txt"
         """
-        fd = open("scores.txt", "w")
+        fd = open(os.path.join(os.path.dirname(__file__), "scores", "scores.txt"), "w")
         for s in self._scores:
             fd.write("%s\t%s\n" % (s[0], s[1]))    
         fd.close()
@@ -311,12 +311,12 @@ class Game:
     def __init__(self):
         """Initialises the game
         """
-        self._car_image = pygame.image.load("./gfx/car.png")
-        self._title_image = pygame.image.load("./gfx/title.png")
-        track_image = pygame.image.load("./gfx/track01.png")
-        self._theme_sound = pygame.mixer.Sound("./muzak/track.ogg")
+        self._car_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "gfx", "car.png"))
+        self._title_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "gfx", "title.png"))
+        track_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "gfx", "track01.png"))
+        self._theme_sound = pygame.mixer.Sound(os.path.join(os.path.dirname(__file__), "muzak", "track.ogg"))
         self._theme_sound.set_volume(1)
-        self._engine_sound = pygame.mixer.Sound("./muzak/engine.ogg")
+        self._engine_sound = pygame.mixer.Sound(os.path.join(os.path.dirname(__file__), "muzak", "engine.ogg"))
         self._engine_sound.set_volume(.2)
         self._font = pygame.font.SysFont(None, 48)
         self._height = track_image.get_height()
