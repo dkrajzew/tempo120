@@ -86,8 +86,9 @@ class Scores:
     long.
     """
     
-    def __init__(self):
+    def __init__(self, path):
         """Loads the scores using the load method."""
+        self._path = path
         self.load()
         
 
@@ -99,7 +100,7 @@ class Scores:
         """
         scores = []
         try:
-            with open(os.path.join(os.path.dirname(__file__), "scores", "scores.txt")) as fd:
+            with open(os.path.join(self._path, "scores", "scores.txt")) as fd:
                 for l in fd:
                     name, t = l.strip().split("\t")
                     scores.append([name, int(t)])
@@ -111,7 +112,7 @@ class Scores:
     def save(self):
         """Saves the scores into "scores.txt"
         """
-        fd = open(os.path.join(os.path.dirname(__file__), "scores", "scores.txt"), "w")
+        fd = open(os.path.join(self._path, "scores", "scores.txt"), "w")
         for s in self._scores:
             fd.write("%s\t%s\n" % (s[0], s[1]))    
         fd.close()
@@ -311,12 +312,15 @@ class Game:
     def __init__(self):
         """Initialises the game
         """
-        self._car_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "gfx", "car.png"))
-        self._title_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "gfx", "title.png"))
-        track_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "gfx", "track01.png"))
-        self._theme_sound = pygame.mixer.Sound(os.path.join(os.path.dirname(__file__), "muzak", "track.ogg"))
+        path = os.path.dirname(__file__)
+        if not os.path.exists(os.path.join(path, "gfx", "car.png")):
+            path = "."
+        self._car_image = pygame.image.load(os.path.join(path, "gfx", "car.png"))
+        self._title_image = pygame.image.load(os.path.join(path, "gfx", "title.png"))
+        track_image = pygame.image.load(os.path.join(path, "gfx", "track01.png"))
+        self._theme_sound = pygame.mixer.Sound(os.path.join(path, "muzak", "track.ogg"))
         self._theme_sound.set_volume(1)
-        self._engine_sound = pygame.mixer.Sound(os.path.join(os.path.dirname(__file__), "muzak", "engine.ogg"))
+        self._engine_sound = pygame.mixer.Sound(os.path.join(path, "muzak", "engine.ogg"))
         self._engine_sound.set_volume(.2)
         self._font = pygame.font.SysFont(None, 48)
         self._height = track_image.get_height()
@@ -324,7 +328,7 @@ class Game:
         self._track = Track(track_image)
         self._theme_channel = pygame.mixer.Channel(0)
         self._engine_channel = pygame.mixer.Channel(1)
-        self._scores = Scores()
+        self._scores = Scores(path)
         self._start_time = 0
         self._last_entered_time = 0
         self._quit = False
