@@ -12,7 +12,7 @@ A racing game written using Python/pygame during the [bpb](https://www.bpb.de/) 
 <img src="https://github.com/dkrajzew/tempo120/blob/main/gfx/screenshot1.png" width="40%"/> <img src="https://github.com/dkrajzew/tempo120/blob/main/gfx/screenshot3.png" width="40%"/>
 <!-- imgs end -->
 
-You may download an executable from the [releases page](https://github.com/dkrajzew/tempo120/releases). The latest version is 1.4.0.
+You may download an executable from the [releases page](https://github.com/dkrajzew/tempo120/releases). The latest version is 1.6.0.
 
 # About
 
@@ -71,6 +71,14 @@ Possible extensions could be:
 I like the game and may port it to c++ once.
 
 # Change Log
+
+## v1.6.0 (28.07.2024)
+
+* Cleaning, mainly
+
+## v1.4.0 (06.08.2023)
+
+* Loads assets both, when installed from PyPI and from the zip.
 
 ## v1.0.0 (03.08.2023)
 
