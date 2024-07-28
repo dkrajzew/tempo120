@@ -7,7 +7,7 @@ __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2023-2024, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "GPL 3.0"
-__version__    = "1.6.0"
+__version__    = "1.8.0"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
 __status__     = "Production"
@@ -32,7 +32,7 @@ if ib>=0 and ie>=0:
 
 setuptools.setup(
     name="tempo120",
-    version="1.6.0",
+    version="1.8.0",
     author="dkrajzew",
     author_email="d.krajzewicz@gmail.com",
     description="A party car racing game",
@@ -59,6 +59,7 @@ setuptools.setup(
             'tempo120 = tempo120:main'
         ]
     },
+    install_requires = [ "pygame==2.6.0" ],
     # see https://pypi.org/classifiers/
     classifiers=[
         "Development Status :: 5 - Production/Stable",

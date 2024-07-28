@@ -15,4 +15,4 @@ rename dist tempo120
 
 python -m build
 rem python -m twine upload --repository pypi dist/*
-python -m twine upload --repository testpypi dist/*
+rem python -m twine upload --repository testpypi dist/*
