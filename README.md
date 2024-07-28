@@ -87,7 +87,7 @@ I like the game and may port it to c++ once.
 
 # Notes
 
-* I tried to use bitmap tiles instead of simply filled polygons - the game gets much slower.
+* I tried to use bitmap tiles instead of simply filled polygons - the game gets much slower. One would have to move to using openGL in this case...
 
 # License
 
