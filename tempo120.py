@@ -1,19 +1,24 @@
-# ===================================================================
-# tempo120 - A party car racing game.
-#
-# The game itself
-#
-# (c) Daniel Krajzewicz 2023
-# daniel@krajzewicz.de
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import print_function
+# ===========================================================================
+"""tempo120 - A party car racing game."""
+# ===========================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2023-2024, Daniel Krajzewicz"
+__credits__    = ["Daniel Krajzewicz"]
+__license__    = "GPL 3.0"
+__version__    = "1.6.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Production"
+# ===========================================================================
 # - https://github.com/dkrajzew/tempo120
-# - https://dkrajzew.itch.io/tempo120
 # - http://www.krajzewicz.de
-#
-# Available under the GPLv3 license.
-# ===================================================================
+# ===========================================================================
 
 
-# --- imports -------------------------------------------------------
+# --- imports ---------------------------------------------------------------
 from random import random
 import os
 import sys
@@ -23,7 +28,7 @@ import pygame.gfxdraw
 from pygame.locals import *
 
 
-# --- constants -----------------------------------------------------
+# --- constants -------------------------------------------------------------
 SIZE = 32
 VIEW_WIDTH = 40
 VIEW_HEIGHT = 25
@@ -44,7 +49,7 @@ TILE_TIRES = (0, 0, 0, 255)
 
  
 
-# --- helper methods ------------------------------------------------
+# --- helper methods --------------------------------------------------------
 def rotatePoint(p, center, angle):
     s = math.sin(angle);
     c = math.cos(angle);
@@ -72,7 +77,7 @@ def nice_time(t):
     return "%02d:%02d:%02d.%03d" % (hours, minutes, seconds, millis)
 
 
-# --- game classes --------------------------------------------------
+# --- game classes ----------------------------------------------------------
 class Scores:
     """
     A class that reads, writes, and processes the high score table.
@@ -429,6 +434,7 @@ class Game:
                 self._ego.accel(dt, -1)
             if pygame.K_ESCAPE in self._pressed_keys:
                 self._state = INTRO_TITLE
+                self._pressed_keys.remove(pygame.K_ESCAPE)
                 self.init()
 
 
@@ -444,14 +450,14 @@ class Game:
         self._start_time = pygame.time.get_ticks()
                 
 
-# --- main function -------------------------------------------------
+# --- main function ---------------------------------------------------------
 def main(args=None):
     pygame.init()
     pygame.mixer.init()
     game = Game()
     surface = pygame.display.set_mode((SCR_WIDTH, SCR_HEIGHT))
     surface.fill((0, 0, 0))
-    pygame.display.set_caption("Tempo 120")
+    pygame.display.set_caption("Tempo120")
 
     t1 = pygame.time.get_ticks()
     while not game._quit:

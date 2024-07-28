@@ -1,30 +1,38 @@
-# ===================================================================
-# tempo120 - A party car racing game.
-#
-# Setup module
-#
-# (c) Daniel Krajzewicz 2023
-# daniel@krajzewicz.de
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# ===========================================================================
+"""tempo120 - Setup module."""
+# ===========================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2023-2024, Daniel Krajzewicz"
+__credits__    = ["Daniel Krajzewicz"]
+__license__    = "GPL 3.0"
+__version__    = "1.6.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Production"
+# ===========================================================================
 # - https://github.com/dkrajzew/tempo120
-# - https://dkrajzew.itch.io/tempo120
 # - http://www.krajzewicz.de
-#
-# Available under the GPLv3 license.
-# ===================================================================
+# ===========================================================================
 
 
 
-# --- imports -------------------------------------------------------
+# --- imports ---------------------------------------------------------------
 import setuptools
 
 
-# --- definitions ---------------------------------------------------
+# --- definitions -----------------------------------------------------------
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
+ib = long_description.find("imgs begin")
+ie = long_description.find("imgs end")
+if ib>=0 and ie>=0:
+    long_description = long_description[:ib] + long_description[ie:]
 
 setuptools.setup(
     name="tempo120",
-    version="1.4.0",
+    version="1.6.0",
     author="dkrajzew",
     author_email="d.krajzewicz@gmail.com",
     description="A party car racing game",
