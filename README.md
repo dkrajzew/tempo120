@@ -78,6 +78,7 @@ I like the game and may port it to c++ once.
 * better handling of leaving the game using ESCAPE
 * cleaning
 * image correction
+* renamed main branch to main
 
 ## v1.4.0 (06.08.2023)
 
