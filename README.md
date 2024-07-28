@@ -8,7 +8,7 @@
 
 A racing game written using Python/pygame during the [bpb](https://www.bpb.de/) ([Bundeszentrale für politische Bildung](https://www.bpb.de/)) [game jam 2023](https://www.bpb.de/veranstaltungen/veranstaltungskalender/518950/bpb-game-jam-2023/). The game jam's topic was mobility.
 
-<img src="https://github.com/dkrajzew/tempo120/blob/master/gfx/screenshot1.png" width="40%"/> <img src="https://github.com/dkrajzew/tempo120/blob/master/gfx/screenshot3.png" width="40%"/>
+<img src="https://github.com/dkrajzew/tempo120/blob/main/gfx/screenshot1.png" width="40%"/> <img src="https://github.com/dkrajzew/tempo120/blob/main/gfx/screenshot3.png" width="40%"/>
 
 You may download an executable version on [itch.io](https://dkrajzew.itch.io/tempo120).
 
