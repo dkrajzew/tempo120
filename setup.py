@@ -38,7 +38,7 @@ setuptools.setup(
     description="A party car racing game",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://dkrajzew.itch.io/tempo120',
+    url='https://github.com/dkrajzew/tempo120',
     download_url='http://pypi.python.org/pypi/tempo120',
     project_urls={
         'Source': 'https://github.com/dkrajzew/tempo120',
