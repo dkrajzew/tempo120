@@ -10,7 +10,7 @@ A racing game written using Python/pygame during the [bpb](https://www.bpb.de/) 
 
 <img src="https://github.com/dkrajzew/tempo120/blob/main/gfx/screenshot1.png" width="40%"/> <img src="https://github.com/dkrajzew/tempo120/blob/main/gfx/screenshot3.png" width="40%"/>
 
-You may download an executable version on [itch.io](https://dkrajzew.itch.io/tempo120).
+You may download an executable from the [releases page](https://github.com/dkrajzew/tempo120/releases). The latest version is 1.4.0.
 
 # About
 
@@ -23,7 +23,7 @@ The higher the speed the more difficult it is to control the vehicle. You do not
 
 ## Install
 
-The most recent compiled version can be found on [itch.io](https://dkrajzew.itch.io/tempo120). This repository includes the source code and assets needed to build / extend the game.
+The most recent compiled version can be found on the [releases page](https://github.com/dkrajzew/tempo120/releases). This repository includes the source code and assets needed to build / extend the game.
 
 ## Build own levels/tracks
 
