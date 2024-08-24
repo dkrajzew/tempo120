@@ -62,7 +62,7 @@ setuptools.setup(
     install_requires = [ "pygame==2.6.0" ],
     # see https://pypi.org/classifiers/
     classifiers=[
-        "Development Status :: 5 - Production/Stable",
+        "Development Status :: 7 - Inactive",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
